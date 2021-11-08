@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DowntimeAlerter.DataAccess\DowntimeAlerter.DataAccess.csproj" />
+    <ProjectReference Include="..\DowntimeAlerter.Domain\DowntimeAlerter.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="HangfireJobs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.Core" Version="1.7.27" />
+    <PackageReference Include="MailKit" Version="2.15.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="MimeKit" Version="2.15.1" />
+  </ItemGroup>
+
+</Project>

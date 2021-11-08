@@ -1,0 +1,36 @@
+﻿@model TargetAppCreateViewModel
+
+
+@{ ViewBag.Title = "Create New Target App"; }
+
+<h1>@ViewBag.Title</h1>
+
+<div class="row identity-forms">
+    <div class="col-md-12">
+        <form method="post">
+            <h4>Create a new target app.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url"></label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MonitoringInterval"></label>
+                <input asp-for="MonitoringInterval" class="form-control" />
+                <span asp-validation-for="MonitoringInterval" class="text-danger"></span>
+            </div>
+            <button style="width:auto" type="submit" class="btn btn-primary">Create Target App</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
