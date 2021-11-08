@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,8 @@ namespace DowntimeAlerter.MVC.UI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddHttpContextAccessor();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -59,6 +62,8 @@ namespace DowntimeAlerter.MVC.UI
             services.AddScoped<IHealthCheckService, HealthCheckManager>();
             services.AddScoped<IHangfireJobService, HangfireJobManager>();
             services.AddScoped<INotificationSender, MailNotificationSender>();
+            services.AddScoped<ILogDal, LogDal>();
+            services.AddScoped<ILogService, LogManager>();
             services.Configure<MailSettings>(Configuration.GetSection("MailAccountSettings"));
 
             services.AddHangfire(configuration => configuration
@@ -79,7 +84,7 @@ namespace DowntimeAlerter.MVC.UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -89,6 +94,8 @@ namespace DowntimeAlerter.MVC.UI
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
+                
                 app.UseHsts();
             }
 

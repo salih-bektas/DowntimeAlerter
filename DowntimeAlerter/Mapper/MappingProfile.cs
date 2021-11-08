@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DowntimeAlerter.Domain.Entities;
+using DowntimeAlerter.MVC.UI.Models.Log;
 using DowntimeAlerter.MVC.UI.Models.TargetApp;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace DowntimeAlerter.MVC.UI.Mapper
             CreateMap<HealthCheckResult, HealthCheckResultViewModel>();
             CreateMap<TargetAppDetailViewModel, TargetApp>();
             CreateMap<TargetApp, TargetAppDetailViewModel>();
+            CreateMap<LogViewModel, Log>();
+            CreateMap<Log, LogViewModel>();
         }
     }
 }

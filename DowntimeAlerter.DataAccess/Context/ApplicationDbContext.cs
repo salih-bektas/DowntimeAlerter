@@ -57,5 +57,6 @@ namespace DowntimeAlerter.Data
 
         public DbSet<TargetApp> TargetApp { get; set; }
         public DbSet<HealthCheckResult> HealthCheckResult { get; set; }
+        public DbSet<Log> Log { get; set; }
     }
 }
