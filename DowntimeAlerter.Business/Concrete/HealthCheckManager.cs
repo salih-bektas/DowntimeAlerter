@@ -74,5 +74,11 @@ namespace DowntimeAlerter.Business.Concrete
                 await _healthCheckDal.InsertAsync(check);
             }
         }
+
+        public Task<List<Domain.Entities.HealthCheckResult>> GetHealthCheckResultsByTargetAppAsync(int targetAppId)
+        {
+            var healthChecks = _healthCheckDal.GetListAsync(t => t.TargetAppId == targetAppId);
+            return healthChecks;
+        }
     }
 }

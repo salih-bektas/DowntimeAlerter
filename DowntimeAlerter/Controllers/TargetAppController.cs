@@ -16,11 +16,15 @@ namespace DowntimeAlerter.MVC.UI.Controllers
     {
         private readonly ITargetAppService _targetAppService;
         private readonly IMapper _mapper;
+        private readonly IHealthCheckService _healthCheckService;
 
-        public TargetAppController(ITargetAppService targetAppService, IMapper mapper)
+        public TargetAppController(ITargetAppService targetAppService, 
+            IMapper mapper,
+            IHealthCheckService healthCheckService)
         {
             _targetAppService = targetAppService;
             _mapper = mapper;
+            _healthCheckService = healthCheckService;
         }
 
         [HttpGet]
@@ -77,7 +81,8 @@ namespace DowntimeAlerter.MVC.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                var targetApp = _mapper.Map<TargetApp>(editViewModel);
+                var targetApp = await _targetAppService.GetByIdAsync(editViewModel.Id);
+                _mapper.Map(targetApp,editViewModel);
                 await _targetAppService.UpdateTargetAppAsync(targetApp);
                 return RedirectToAction("List");
             }
@@ -94,6 +99,29 @@ namespace DowntimeAlerter.MVC.UI.Controllers
             await _targetAppService.DeleteAsync(id);
 
             return RedirectToAction("List");
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var targetApp = await _targetAppService.GetByIdAsync(id);
+            var targetAppViewModel = _mapper.Map<TargetAppDetailViewModel>(targetApp);
+
+            var healthCheckResult = await _healthCheckService.GetHealthCheckResultsByTargetAppAsync(targetApp.Id);
+
+            var healthCheckResultViewModelList = new List<HealthCheckResultViewModel>();
+            foreach(var item in healthCheckResult)
+            {
+                healthCheckResultViewModelList.Add(_mapper.Map<HealthCheckResultViewModel>(item));
+            }
+
+            targetAppViewModel.CheckResults = healthCheckResultViewModelList;
+
+            return View(targetAppViewModel);
         }
     }
 }

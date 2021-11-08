@@ -31,21 +31,5 @@ namespace DowntimeAlerter.DataAccess.Repository
         T Update(T entity, params string[] exludeProperties);
         Task<int> UpdateAsync(T entity, params string[] exludeProperties);
 
-        void Delete(T entity);
-
-        IDbContextTransaction BeginTransaction();
-        Task<IDbContextTransaction> BeginTransactionAsync();
-
-
-        void AddWithoutSave(T entity);
-        void UpdateWithoutSave(T entity);
-        void UpdateWithoutSave(T entity, params string[] exludeProperties);
-        void DeleteWithoutSave(T entity);
-
-
-        void Detach(T entity);
-
-        void SaveChanges();
-        Task<int> SaveChangesAsync();
     }
 }
