@@ -66,42 +66,7 @@ namespace DowntimeAlerter.DataAccess.Repository
             _tContext.SaveChanges();
             return updatedEntity.Entity;
         }
-
-        public virtual void Delete(TEntity entity)
-        {
-            var deletedEntity = _tContext.Entry(entity);
-            deletedEntity.State = EntityState.Deleted;
-            _tContext.SaveChanges();
-        }
-
-        public virtual void AddWithoutSave(TEntity entity)
-        {
-            var addedEntity = _tContext.Entry(entity);
-            addedEntity.State = EntityState.Added;
-        }
-
-        public virtual void UpdateWithoutSave(TEntity entity)
-        {
-            var updatedEntity = _tContext.Entry(entity);
-            updatedEntity.State = EntityState.Modified;
-        }
-
-        public virtual void UpdateWithoutSave(TEntity entity, params string[] excludeProperties)
-        {
-            var updatedEntity = _tContext.Entry(entity);
-            updatedEntity.State = EntityState.Modified;
-
-            foreach (var propertyName in excludeProperties)
-            {
-                updatedEntity.Property(propertyName).IsModified = false;
-            }
-        }
-
-        public virtual void DeleteWithoutSave(TEntity entity)
-        {
-            var deletedEntity = _tContext.Entry(entity);
-            deletedEntity.State = EntityState.Deleted;
-        }
+                
 
         public IQueryable<TEntity> Table
         {
@@ -116,36 +81,6 @@ namespace DowntimeAlerter.DataAccess.Repository
             }
         }
 
-        public IDbContextTransaction BeginTransaction()
-        {
-            return _tContext.Database.BeginTransaction();
-        }
-
-        public void Detach(TEntity entity)
-        {
-            _tContext.Entry(entity).State = EntityState.Detached;
-        }
-
-        public void SaveChanges()
-        {
-            _tContext.SaveChanges();
-        }
-
-        public void DetachAllEntities()
-        {
-            var changedEntriesCopy = _tContext.ChangeTracker.Entries()
-                .Where(r =>
-                r.State == EntityState.Added ||
-                r.State == EntityState.Modified ||
-                r.State == EntityState.Deleted).ToList();
-
-            foreach (var entry in changedEntriesCopy)
-            {
-                entry.State = EntityState.Detached;
-            }
-        }
-
-        //Async implementations
         public virtual Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter)
         {
             return _tContext.Set<TEntity>().SingleOrDefaultAsync(filter);
@@ -206,14 +141,6 @@ namespace DowntimeAlerter.DataAccess.Repository
             return _tContext.SaveChangesAsync();
         }
 
-        public Task<IDbContextTransaction> BeginTransactionAsync()
-        {
-            return _tContext.Database.BeginTransactionAsync();
-        }
 
-        public Task<int> SaveChangesAsync()
-        {
-            return _tContext.SaveChangesAsync();
-        }
     }
 }

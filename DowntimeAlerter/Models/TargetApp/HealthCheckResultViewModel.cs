@@ -1,17 +1,19 @@
 ﻿using DowntimeAlerter.Domain.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace DowntimeAlerter.Domain.Entities
+namespace DowntimeAlerter.MVC.UI.Models.TargetApp
 {
-    public class HealthCheckResult: BaseObject
+    public class HealthCheckResultViewModel
     {
-        public int TargetAppId { get; set; }
+        [Display(Name = "Health Check Time")]
         public DateTime HealthCheckTime { get; set; }
         public HealthStatusEnum Result { get; set; }
+
+        [Display(Name = "Status Code")]
         public int StatusCode { get; set; }
     }
 }

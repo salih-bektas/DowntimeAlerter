@@ -18,6 +18,10 @@ namespace DowntimeAlerter.MVC.UI.Mapper
             CreateMap<TargetApp, TargetAppCreateViewModel>();
             CreateMap<TargetAppEditViewModel, TargetApp>();
             CreateMap<TargetApp, TargetAppEditViewModel>();
+            CreateMap<HealthCheckResultViewModel, HealthCheckResult>();
+            CreateMap<HealthCheckResult, HealthCheckResultViewModel>();
+            CreateMap<TargetAppDetailViewModel, TargetApp>();
+            CreateMap<TargetApp, TargetAppDetailViewModel>();
         }
     }
 }

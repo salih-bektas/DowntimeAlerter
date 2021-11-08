@@ -17,14 +17,5 @@ namespace DowntimeAlerter.Business.Abstract
 
         Task DeleteAsync(int id);
 
-        //TargetApp Get(Expression<Func<TargetApp, bool>> filter);
-
-        //List<TargetApp> GetList(Expression<Func<TargetApp, bool>> filter);
-
-        //TargetApp Insert(TargetApp obj);
-
-        //TargetApp Update(TargetApp obj);
-
-        //void Delete(int id);
     }
 }

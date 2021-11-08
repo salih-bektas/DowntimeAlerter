@@ -1,0 +1,33 @@
+﻿@model TargetAppDetailViewModel
+
+@{ ViewData["Title"] = "Health Check Results"; }
+
+<h1>Health Check Results</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.MonitoringInterval)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.MonitoringInterval)
+        </dd>
+    </dl>
+</div>
+
+@Html.Partial("_CheckResults", Model.CheckResults)
+
+<a class="btn btn-secondary" asp-action="List">Back to List</a>

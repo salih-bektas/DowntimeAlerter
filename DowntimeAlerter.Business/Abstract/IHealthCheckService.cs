@@ -10,5 +10,6 @@ namespace DowntimeAlerter.Business.Abstract
     public interface IHealthCheckService
     {
         Task CheckHealth(int targetId, string userMail);
+        Task<List<HealthCheckResult>> GetHealthCheckResultsByTargetAppAsync(int targetAppId);
     }
 }

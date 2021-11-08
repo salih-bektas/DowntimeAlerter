@@ -91,41 +91,5 @@ namespace DowntimeAlerter.Business.Concrete
             var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             return _userManager.FindByIdAsync(userId).Result;
         }
-
-        //public void Delete(int id)
-        //{
-        //    var obj = _targetAppDal.Get(t => t.Id == id);
-        //    _targetAppDal.Delete(obj);
-        //}
-
-        //public TargetApp Get(Expression<Func<TargetApp, bool>> filter)
-        //{
-        //    return _targetAppDal.Get(filter);
-        //}
-
-        //public List<TargetApp> GetAll()
-        //{
-        //    return _targetAppDal.GetList();
-        //}
-
-        //public TargetApp GetById(int id)
-        //{
-        //    return _targetAppDal.Get(t => t.Id == id);
-        //}
-
-        //public List<TargetApp> GetList(Expression<Func<TargetApp, bool>> filter)
-        //{
-        //    return _targetAppDal.GetList(filter);
-        //}
-
-        //public TargetApp Insert(TargetApp obj)
-        //{
-        //    return _targetAppDal.Add(obj);
-        //}
-
-        //public TargetApp Update(TargetApp obj)
-        //{
-        //    return _targetAppDal.Update(obj);
-        //}
     }
 }
